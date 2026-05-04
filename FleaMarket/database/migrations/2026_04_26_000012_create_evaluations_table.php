@@ -9,21 +9,18 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('price');
-            $table->string('brand')->nullable();
-            $table->string('description');
-            $table->string('img_url');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('evaluator_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('item_id')->constrained()->cascadeOnDelete();
+            $table->integer('stars');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('evaluations');
     }
 };

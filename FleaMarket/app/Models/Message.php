@@ -5,24 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryItem extends Model
+class Message extends Model
 {
     use HasFactory;
 
-    protected $table = 'category_items';
-
-    protected $primaryKey = ['item_id', 'category_id'];
-
-    public $incrementing = false;
-
     protected $fillable = [
+        'user_id',
         'item_id',
-        'category_id'
+        'text',
+        'img_url',
+        'read_at',
     ];
 
-    public function category()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function item()
